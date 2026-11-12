@@ -1,0 +1,78 @@
+import { ProfileCard } from "../components/common/ProfileCard";
+import { SKILLIcons } from "@/constants";
+import { PageHeader } from "../components/common/PageHeader";
+import { HighLightText } from "../components/common/HighLightText";
+
+
+import { TECH_ICONS } from "@/constants";
+import ToolTipEffect from "@/components/ui/tooltip";
+export const AboutPage = () => {
+    {/* second section  */ }
+    return <section className="h-full w-full flex flex-col items-center justify-evenly gap-10  p-4 md:p-0" >
+        {/* image div */}
+        <div className="h-full w-full flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-0">
+
+            {/* rigth part for about me */}
+            <div className="flex flex-col justify-center gap-8 w-full md:w-[50%] ">
+                <AboutComp />
+            </div>
+            {/* Image - animates with first paragraph */}
+            <div
+            >
+                <ProfileCard />
+            </div>
+        </div>
+        {/* Skills - animates last */}
+        <div className="w-full">
+            <SkillsComponent />
+        </div>
+    </section >
+}
+
+
+const AboutComp = () => {
+    return <div className="flex flex-col gap-8 w-full md:w-150 font-light dark:font-extralight ">
+        {/* Header - animates first */}
+        <div>
+            <PageHeader val={'01.'} subheading={"About"} mainHeading={"Me"} />
+        </div>
+
+        <span className="text-base md:text-xl flex flex-col gap-4">
+            {/* First paragraph - animates with image */}
+            <p>
+                Hey! I'm Tarun, a second-year Bachelor of Computer Applications (BCA) student based in Jaipur, Rajasthan. I build solutions that
+                <HighLightText text={' connect smart logic with great design. '} />
+                I believe that the best apps aren't just fast—they are
+                <HighLightText text={' reliable and easy to use. '} />
+            </p>
+
+            {/* Second paragraph - animates after first */}
+            <p>
+                My goal is simple: making software that feels
+                <HighLightText text={' effortless for the user. '} />
+                Whether exploring core systems with Java and Python, building machine learning models, or developing modern web and desktop apps, I keep a
+                <HighLightText text={' human-first mindset '} />
+                in everything I create.
+            </p>
+        </span>
+    </div>
+}
+
+
+const SkillsComponent = () => {
+    return (
+        <div className="mt-4 w-full flex flex-col pl ">
+            <h3 className="text-sm md:text-base font-semibold tracking-widest text-muted-foreground mb-2">
+                EXPERTISE AREAS
+            </h3>
+            <div className="font-medium flex  gap-6 text-2xl w-full">
+                {SKILLIcons.map((iconName) => {
+                    const Icon = TECH_ICONS[iconName];
+                    return Icon ? (
+                        <ToolTipEffect key={iconName} Icon={Icon} name={iconName} />
+                        ) : null;
+                })}
+            </div>
+        </div>
+    );
+}
