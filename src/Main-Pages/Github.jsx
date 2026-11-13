@@ -49,15 +49,19 @@ export const GithubPage = () => {
 
             throw new Error('Unable to load GitHub contributions');
         },
-        staleTime: Infinity, // Fetch once and cache for the entire session
+        staleTime: 5 * 60 * 1000,
+        gcTime: 30 * 60 * 1000,
+        refetchOnWindowFocus: true,
+        refetchOnMount: true,
+        refetchInterval: 60 * 60 * 1000,
     });
 
 
 
     // Red for light mode, Yellow for dark mode
     const explicitTheme = {
-        light: ['#ebedf0', '#ffcdd2', '#ef9a9a', '#e53935', '#b71c1c'],
-        dark: ['#2d2d2d', '#fff9c4', '#fff176', '#fdd835', '#f9a825'],
+        light: ['#89aadb', '#2be365', '#ef9a9a', '#e53935', '#1317ff'],
+        dark: ['#151223', '#5e42cd', '#7e28c0', '#ababaa', '#7df925'],
     };
 
     return (
@@ -85,7 +89,7 @@ export const GithubPage = () => {
                                 <div>
                                     <h3 className="text-2xl font-bold mb-2">GitHub Activity</h3>
                                     <p className="text-gray-500 dark:text-gray-400">
-                                        Total: <span className="font-mono font-bold text-black dark:text-white">{data?.total?.lastYear || 0}</span> contributions in the last year
+                                         <span className="font-mono font-bold text-black dark:text-white">{}</span> contributions in the last year
                                     </p>
                                 </div>
                                 <div className="text-sm text-gray-400">
@@ -100,7 +104,7 @@ export const GithubPage = () => {
                                             data={data.contributions}
                                             theme={explicitTheme} // Use the robust theme
                                             labels={{
-                                                totalCount: '{{count}} contributions in {{year}}',
+                                                totalCount: ' contributions in {{year}}',
                                             }}
                                             colorScheme={isDark ? 'dark' : 'light'}
                                             showWeekdayLabels

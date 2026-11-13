@@ -1,6 +1,13 @@
 // server/githubController.js
 export const getGitHubData = async (req, res) => {
     try {
+
+        res.set({
+            "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        });
+
         const username = process.env.GITHUB_USERNAME || 'tarunx47';
         const token = process.env.GITHUB_TOKEN;
 
