@@ -76,9 +76,31 @@ export default function ChatBubble() {
 				const reader = response.body.getReader();
 				const decoder = new TextDecoder();
 				let accumulatedText = '';
+				let pendingLine = '';
+				const processLine = (line) => {
+					if (!line) return;
+					const data = JSON.parse(line);
+					if (data.error) throw new Error(data.error);
+					if (data.text !== undefined) {
+						accumulatedText += data.text;
+						setMessages((prev) =>
+							prev.map((msg) =>
+								msg.id === botMessageId ? { ...msg, text: accumulatedText, isStreaming: true } : msg
+							)
+						);
+					}
+					if (data.done) {
+						setMessages((prev) =>
+							prev.map((msg) =>
+								msg.id === botMessageId ? { ...msg, isStreaming: false } : msg
+							)
+						);
+					}
+				};
 				while (true) {
 					const { done, value } = await reader.read();
 					if (done) {
+						if (pendingLine) processLine(pendingLine);
 						setMessages((prev) =>
 							prev.map((msg) =>
 								msg.id === botMessageId ? { ...msg, text: accumulatedText, isStreaming: false } : msg
@@ -86,29 +108,13 @@ export default function ChatBubble() {
 						);
 						break;
 					}
-					const chunk = decoder.decode(value, { stream: true });
-					const lines = chunk.split('\n').filter(Boolean);
-					for (const line of lines) {
-						try {
-							const data = JSON.parse(line);
-							if (data.text !== undefined) {
-								accumulatedText += data.text;
-								setMessages((prev) =>
-									prev.map((msg) =>
-										msg.id === botMessageId ? { ...msg, text: accumulatedText, isStreaming: true } : msg
-									)
-								);
-							}
-							if (data.done) {
-								setMessages((prev) =>
-									prev.map((msg) =>
-										msg.id === botMessageId ? { ...msg, isStreaming: false } : msg
-									)
-								);
-							}
-						} catch { /* ignore parse errors */ }
-					}
+					const chunk = pendingLine + decoder.decode(value, { stream: true });
+					const lines = chunk.split('\n');
+					pendingLine = lines.pop();
+					for (const line of lines) processLine(line);
 				}
+			} else {
+				throw new Error('The AI service returned an empty response.');
 			}
 		} catch (error) {
 			console.error('Error sending message:', error);

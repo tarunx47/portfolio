@@ -1,4 +1,4 @@
-# 🚀 Tarun Dayma's Developer Portfolio
+# Tarun Dayma's Developer Portfolio
 
 > **Considered interfaces, useful systems, and work in progress.**
 
@@ -6,23 +6,23 @@ Welcome to my developer portfolio! This application showcases my software projec
 
 ---
 
-## 🎯 What's Inside?
+## Features
 
-### 💬 AI-Powered Portfolio Assistant
+### AI-powered portfolio assistant
 The floating chatbot (powered by **Google Gemini**) acts as an interactive assistant. Visitors can ask questions about my projects, education, technical skills, and background.
 
-### 🌓 Dark / Light Mode
+### Dark / light mode
 Carefully styled theme toggle supporting both aesthetic dark mode and clean light mode.
 
-### ✨ Polished Interaction & Navigation
+### Interaction and navigation
 Smooth section transitions, responsive layout, bento grid showcases, and full-screen certificate previews.
 
-### 📊 Real-Time GitHub Contributions
+### GitHub contributions
 Integrated GitHub activity heatmap dynamically visualizing commit history via GraphQL and fallback endpoints.
 
 ---
 
-## 🛠️ Built With
+## Built with
 
 ### Frontend
 - **React 18** + **Vite**
@@ -40,7 +40,7 @@ Integrated GitHub activity heatmap dynamically visualizing commit history via Gr
 
 ---
 
-## 🎪 Featured Projects
+## Featured projects
 
 | Project | Description | Stack | Links |
 |---------|-------------|-------|-------|
@@ -53,7 +53,7 @@ Integrated GitHub activity heatmap dynamically visualizing commit history via Gr
 
 ---
 
-## 🚀 Quick Start
+## Quick start
 
 ### Prerequisites
 - Node.js (v18+)
@@ -77,21 +77,26 @@ Create `.env` in the root and in `server/`:
 
 ```bash
 # Frontend (.env)
-VITE_API_URL=http://localhost:5000
+# Leave unset in production when API routes run in this Vercel project.
+VITE_API_URL=http://localhost:5001
 
 # Backend (server/.env)
-VITE_GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 GITHUB_TOKEN=your_optional_github_token_here
-PORT=5000
+PORT=5001
 CORS_ORIGIN=http://localhost:5173
 ```
+
+For Vercel, configure `GEMINI_API_KEY` (and optionally `GITHUB_TOKEN`,
+`GITHUB_USERNAME`, and `CORS_ORIGIN`) in the project settings. Do not create a
+`VITE_GEMINI_API_KEY`; `VITE_` variables are exposed to the browser bundle.
 
 ### 3. Running Locally
 ```bash
 # Terminal 1: Frontend (port 5173)
 npm run dev
 
-# Terminal 2: Backend (port 5000)
+# Terminal 2: Backend (port 5001)
 cd server && npm start
 ```
 
@@ -102,7 +107,7 @@ npm run build
 
 ---
 
-## 📜 About Me
+## About
 
 - **Name:** Tarun Dayma
 - **Location:** Jaipur, Rajasthan, India

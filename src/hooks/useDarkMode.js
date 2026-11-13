@@ -14,7 +14,6 @@ export function useDarkMode() {
         } else {
             document.documentElement.classList.remove('dark');
         }
-        // Save preference to localStorage
         localStorage.setItem('darkMode', JSON.stringify(isDark));
     }, [isDark]);
 

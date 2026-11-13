@@ -1,6 +1,5 @@
 import { PROJECTS } from "@/constants";
 import { ProjectContextProvider, useProject } from "@/context/ProjectContext";
-import { useNavToggleContextProvider } from "@/context/NavToggleContext";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Github, Globe, ArrowUpRight } from "lucide-react";
 
@@ -16,10 +15,8 @@ export const AllProjectsPage = () => {
         navigate('/');
     };
 
-    const { toggle } = useNavToggleContextProvider();
-
     return (
-        <div className={`transition-all duration-700 min-h-screen w-full bg-[#fcfcfc] dark:bg-[#050505] text-black dark:text-white p-4 md:py-12 md:pr-12 ${toggle ? "md:pl-[10vw]" : "md:pl-[13vw]"}`}>
+        <div className="min-h-screen w-full bg-background p-4 text-foreground md:px-12 md:py-12">
             {/* header section */}
             <div className="max-w-7xl mx-auto mb-16 pt-8">
                 <button
@@ -66,21 +63,29 @@ const ProjectCard = () => {
 
     return (
         <div
-            className="group flex flex-col gap-4 cursor-pointer"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+                if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) {
+                    event.preventDefault();
+                    handleNavigation();
+                }
+            }}
+            className="group flex flex-col gap-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={handleNavigation}
         >
             {/* Image Container */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/50 shadow-sm transition-all duration-700 ease-out group-hover:shadow-2xl dark:group-hover:shadow-emerald-900/10">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-border bg-card transition-colors group-hover:border-foreground/30">
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 dark:group-hover:bg-white/5 transition-colors duration-700 ease-out z-10" />
                 <img
                     src={props.image}
                     alt={props.topicName}
-                    className="w-full h-full object-cover transition-transform duration-1000 ease-[0.22,1,0.36,1] group-hover:scale-110"
+                    className="h-full w-full object-cover"
                 />
 
                 {/* Floating link icon */}
                 <div className="absolute top-4 right-4 z-20 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 ease-out">
-                    <div className="p-3 bg-white dark:bg-black rounded-full shadow-lg">
+                    <div className="rounded-md border border-border bg-background p-3">
                         <ArrowUpRight className="w-5 h-5 text-black dark:text-white" />
                     </div>
                 </div>
@@ -89,7 +94,7 @@ const ProjectCard = () => {
             {/* Info */}
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-red-500 dark:group-hover:text-yellow-400 transition-colors duration-500">
+                    <h3 className="text-xl font-semibold text-foreground">
                         {props.topicName}
                     </h3>
                     <div className="flex gap-2">

@@ -13,10 +13,9 @@ const requestedPort = process.env.PORT ? Number(process.env.PORT) : 5001;
 const PORT = (requestedPort === 5000 && process.platform === 'darwin') ? 5001 : requestedPort;
 
 import { getGitHubData } from './githubController.js';
-import { getReadsData } from './readsController.js';
 
 // Added: trust proxy for reverse proxies
-const isTrustProxy = process.env.isTrustProxy ? true : false;
+const isTrustProxy = process.env.isTrustProxy === 'true';
 app.set('trust proxy', isTrustProxy);
 
 const allowedOrigins = [
@@ -24,7 +23,8 @@ const allowedOrigins = [
   'http://localhost:5174',
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
-  process.env.CORS_ORIGIN
+  ...(process.env.CORS_ORIGIN || '').split(','),
+  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ''
 ].filter(Boolean);
 
 app.use(cors({
@@ -42,8 +42,6 @@ app.use(cors({
 
 // GitHub API Route
 app.get('/api/github', getGitHubData);
-// Reads API Route
-app.get('/api/reads', getReadsData);
 
 // Server-side fallback prompt (first-person voice)
 const SYSTEM_PROMPT = [
@@ -84,8 +82,7 @@ const chatLimiter = rateLimit({
 // Apply rate limiter to chat endpoint
 app.post('/api/chat', chatLimiter, async (req, res) => {
   try {
-    // Backend API key lookup (prefers GEMINI_API_KEY, falls back to legacy VITE_GEMINI_API_KEY)
-    const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       console.error('[Error] GEMINI_API_KEY not configured');
       return res.status(500).json({ error: 'AI service not configured' });
@@ -96,15 +93,22 @@ app.post('/api/chat', chatLimiter, async (req, res) => {
     if (!message || typeof message !== 'string') {
       return res.status(400).json({ error: 'Invalid message' });
     }
+    if (!Array.isArray(history)) {
+      return res.status(400).json({ error: 'Invalid conversation history' });
+    }
 
-    // Sanitize
     const sanitizedMessage = sanitizeInput(message);
-    // Authoritative system prompt strictly controlled by backend; client cannot override
-    const sanitizedSystemPrompt = SYSTEM_PROMPT;
-    const sanitizedHistory = history.map((h) => ({
-      role: h.role,
-      parts: [{ text: sanitizeInput(h.parts?.[0]?.text || '') }],
-    }));
+    if (!sanitizedMessage) {
+      return res.status(400).json({ error: 'Invalid message' });
+    }
+    const sanitizedHistory = history
+      .slice(-10)
+      .filter((h) => h && (h.role === 'user' || h.role === 'model'))
+      .map((h) => ({
+        role: h.role,
+        parts: [{ text: sanitizeInput(h.parts?.[0]?.text || '') }],
+      }))
+      .filter((h) => h.parts[0].text);
 
     // Build Gemini contents with user and past conversational turns
     const contents = [
@@ -113,8 +117,8 @@ app.post('/api/chat', chatLimiter, async (req, res) => {
     ];
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const primaryModel = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
-    const fallbackModel = 'gemini-3.8-flash';
+    const primaryModel = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+    const fallbackModel = 'gemini-3.5-flash-lite';
 
     const generationConfig = {
       temperature: 0.7,
@@ -162,9 +166,9 @@ app.post('/api/chat', chatLimiter, async (req, res) => {
   } catch (error) {
     console.error('[Error]', error.message);
     if (!res.headersSent) {
-      res.status(500).json({ error: 'Failed to generate response', details: error.message });
+      res.status(500).json({ error: 'Failed to generate response' });
     } else {
-      res.write(JSON.stringify({ error: 'Stream interrupted', details: error.message }) + '\n');
+      res.write(JSON.stringify({ error: 'Stream interrupted' }) + '\n');
       res.end();
     }
   }
@@ -174,6 +178,10 @@ app.post('/api/chat', chatLimiter, async (req, res) => {
 
 
 
-app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

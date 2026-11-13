@@ -48,8 +48,8 @@ const AboutComp = () => {
 
             {/* Second paragraph - animates after first */}
             <p>
-                My goal is simple: making software that feels
-                <HighLightText text={' effortless for the user. '} />
+                I focus on making software that is
+                <HighLightText text={' clear to use and maintain. '} />
                 Whether exploring core systems with Java and Python, building machine learning models, or developing modern web and desktop apps, I keep a
                 <HighLightText text={' human-first mindset '} />
                 in everything I create.

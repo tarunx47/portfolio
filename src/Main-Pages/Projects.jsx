@@ -65,13 +65,9 @@ const ProjectInfoDiv = () => {
             className="max-w-6xl w-full mx-auto p-2 md:p-4 my-8 md:my-16"
         >
             <div className={cn(
-                "bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-4 md:p-6 shadow-2xl border-3 border-gray-100 dark:border-white/10 flex flex-col gap-6 relative overflow-hidden transition-all duration-700 ease-out hover:shadow-2xl dark:hover:shadow-emerald-500/5",
+                "bg-card rounded-lg p-4 md:p-6 border border-border flex flex-col gap-6 relative overflow-hidden transition-colors hover:border-foreground/30",
                 index === 0 ? "md:flex-row items-center" : "md:flex-row-reverse items-center"
             )}>
-                {/* Decorative background blur */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-red-50 dark:bg-red-900/10 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-slate-50 dark:bg-slate-900/10 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
-
                 {/* --- IMAGE SECTION (Left, 2/3) --- */}
                 {/* Added justify-center to vertically center the image if the text column is taller */}
                 <div className="w-full md:w-2/3 flex flex-col justify-center gap-4 relative group">
@@ -128,16 +124,14 @@ const ProjectInfoDiv = () => {
 
 const ProjectImageDiv = () => {
     const { props } = useProject();
-    return (<div className="relative rounded-xl overflow-hidden shadow-2xl border-2 border-gray-200 dark:border-gray-700 group h-full w-full aspect-video">
-        {/* Previous Gradient Logic: z-20 overlay */}
-        <div className="absolute inset-0 bg-black/0 dark:bg-gradient-to-br dark:from-green-500/30 dark:via-emerald-400/25 dark:to-teal-500/30 z-20 transition-opacity duration-700 ease-out md:group-hover:opacity-0 pointer-events-none mix-blend-multiply dark:mix-blend-overlay"></div>
+    return (<div className="relative h-full w-full aspect-video overflow-hidden rounded-lg border border-border bg-muted">
 
         <img
             src={props.image}
             alt={props?.topicName || "Project preview"}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover z-10 transition-transform duration-1000 ease-out md:group-hover:scale-110"
+            className="h-full w-full object-cover"
         />
     </div>)
 }

@@ -12,7 +12,7 @@ export const HomePage = () => {
     };
 
     return (
-        <section className="hero-shell relative isolate min-h-[100svh] w-full overflow-hidden bg-[#090a0a] text-stone-100">
+        <section className="hero-shell relative isolate min-h-[100svh] w-full overflow-hidden bg-background text-foreground">
             <HeroBackground />
 
             <div className="hero-noise pointer-events-none absolute inset-0 z-0" />

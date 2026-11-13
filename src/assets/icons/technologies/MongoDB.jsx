@@ -1,3 +1,4 @@
+// fixmyslop-ignore[ui/palette-sprawl] The official MongoDB logo uses a multi-tone source palette.
 export default function MongoDB({ color = "currentColor", size = 24 }) {
     return (
         <svg

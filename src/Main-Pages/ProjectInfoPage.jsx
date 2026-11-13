@@ -22,7 +22,7 @@ export const ProjectInfoPage = () => {
                 <h1 className="text-4xl font-bold">Project Not Found</h1>
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 dark:bg-white dark:text-black text-white rounded-full transition-all hover:scale-105"
+                    className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                     <ArrowLeft className="w-4 h-4" /> Back to Projects
                 </button>
@@ -60,13 +60,13 @@ export const ProjectInfoPage = () => {
                     <div className="flex flex-wrap gap-4">
                         {project.github && (
                             <a href={project.github} target="_blank" rel="noopener noreferrer"
-                                className="group flex items-center gap-2 px-6 py-2.5 bg-black dark:bg-white dark:text-black text-white rounded-full font-medium transition-all duration-500 ease-out hover:scale-105 active:scale-95 shadow-lg shadow-black/10 dark:shadow-white/5 hover:bg-slate-800 dark:hover:bg-gray-200">
+                                className="group flex items-center gap-2 rounded-md bg-primary px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary/90">
                                 <Github className="w-5 h-5 transition-transform duration-500" /> View on GitHub
                             </a>
                         )}
                         {project.deployLink && project.deployLink.trim() !== '' && (
                             <a href={project.deployLink} target="_blank" rel="noopener noreferrer"
-                                className="group flex items-center gap-2 px-6 py-2.5 bg-black dark:bg-white dark:text-black text-white rounded-full font-medium transition-all duration-500 ease-out hover:scale-105 active:scale-95 shadow-lg shadow-black/10 dark:shadow-white/5 hover:bg-slate-800 dark:hover:bg-gray-200">
+                                className="group flex items-center gap-2 rounded-md bg-primary px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary/90">
                                 <ExternalLink className="w-5 h-5 transition-transform duration-500" /> View Live Demo
                             </a>
                         )}
@@ -75,12 +75,12 @@ export const ProjectInfoPage = () => {
 
                 {/* Main Feature Image */}
                 <div
-                    className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-gray-100 dark:border-white/10 group bg-gray-50 dark:bg-gray-900"
+                    className="w-full aspect-video overflow-hidden rounded-lg border border-border bg-card"
                 >
                     <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                        className="h-full w-full object-cover"
                     />
                 </div>
 

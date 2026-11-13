@@ -72,7 +72,7 @@ export const GithubPage = () => {
                 {isLoading ? (
                     <div className="flex flex-col items-center justify-center h-64 gap-4">
                         <div className="w-12 h-12 border-t-2 border-b-2 border-primary rounded-full animate-spin"></div>
-                        <p className="text-gray-500 animate-pulse">Loading GitHub stats...</p>
+                        <p className="text-gray-500">Loading GitHub stats...</p>
                     </div>
                 ) : error ? (
                     <div className="text-center text-red-500 p-8 border border-red-500/20 rounded-xl bg-red-500/5">
@@ -80,7 +80,7 @@ export const GithubPage = () => {
                     </div>
                 ) : (
                     <div className="flex flex-col gap-8">
-                        <div className="bg-white dark:bg-[#0d1117] p-8 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden">
+                        <div className="overflow-hidden rounded-lg border border-border bg-card p-8">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
                                 <div>
                                     <h3 className="text-2xl font-bold mb-2">GitHub Activity</h3>

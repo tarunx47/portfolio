@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, X, ExternalLink } from "lucide-react";
-import { useNavToggleContextProvider } from "@/context/NavToggleContext";
 import { ACHIEVEMENTS } from "@/constants/achievements";
 import { CertificateCard } from "@/components/CertificateCard";
 
@@ -29,10 +28,8 @@ export const AllCertificatesPage = () => {
         navigate('/');
     };
 
-    const { toggle } = useNavToggleContextProvider();
-
     return (
-        <div className={`transition-all duration-700 min-h-screen w-full bg-[#fcfcfc] dark:bg-[#050505] text-black dark:text-white p-4 md:py-12 md:pr-12 ${toggle ? "md:pl-[10vw]" : "md:pl-[13vw]"}`}>
+        <div className="min-h-screen w-full bg-background p-4 text-foreground md:py-12 md:px-12">
             {/* header section */}
             <div className="max-w-7xl mx-auto mb-16 pt-8">
                 <button
@@ -67,36 +64,40 @@ export const AllCertificatesPage = () => {
             {/* Modal */}
             {selected && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-                    <div 
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+                    <button
+                        type="button"
+                        aria-label="Close certificate preview"
+                        className="absolute inset-0 bg-black/60 transition-opacity"
                         onClick={() => setSelected(null)}
-                    ></div>
+                    />
                     
-                    <div className="relative bg-white dark:bg-[#0a0a0a] w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col transform transition-all animate-in fade-in zoom-in-95 duration-300 border border-gray-200 dark:border-white/10">
+                    <div className="relative flex w-full max-w-4xl flex-col overflow-hidden rounded-lg border border-border bg-card">
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-white/10">
                             <h3 className="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 pr-8">
                                 {selected.title}
                             </h3>
                             <button 
+                                type="button"
+                                aria-label="Close certificate preview"
                                 onClick={() => setSelected(null)}
-                                className="p-2 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 rounded-full transition-colors text-slate-900 dark:text-white"
+                                className="rounded-md bg-muted p-2 text-foreground transition-colors hover:bg-accent"
                             >
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
                         
                         {/* Image Preview */}
-                        <div className="w-full bg-gray-50 dark:bg-zinc-900/50 aspect-[4/3] md:aspect-video flex items-center justify-center overflow-hidden p-4">
+                        <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-muted p-4 md:aspect-video">
                             <img 
                                 src={selected.image} 
                                 alt={selected.title}
-                                className="w-full h-full object-contain drop-shadow-xl"
+                                className="h-full w-full object-contain"
                             />
                         </div>
 
                         {/* Footer */}
-                        <div className="p-4 md:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-[#0a0a0a] border-t border-gray-100 dark:border-white/10">
+                        <div className="flex flex-col items-center justify-between gap-4 border-t border-border bg-card p-4 md:flex-row md:p-6">
                             <div className="text-sm text-slate-600 dark:text-slate-400 text-center sm:text-left">
                                 Issued by <span className="font-semibold text-slate-900 dark:text-white">{selected.organization}</span> in {selected.year}
                             </div>
@@ -104,7 +105,7 @@ export const AllCertificatesPage = () => {
                                 href={selected.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-2 px-6 py-2.5 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto"
+                                className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
                             >
                                 Verify Certificate
                                 <ExternalLink className="w-4 h-4" />
