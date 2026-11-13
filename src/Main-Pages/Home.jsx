@@ -81,8 +81,6 @@ function HeroBackground() {
                     <source src={HERO_VIDEO} type="video/mp4" />
                 </video>
             )}
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,10,10,0.78)_0%,rgba(9,10,10,0.42)_52%,rgba(9,10,10,0.2)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(9,10,10,0.88)_0%,rgba(9,10,10,0.14)_52%,rgba(9,10,10,0.42)_100%)]" />
         </div>
     );
 }
