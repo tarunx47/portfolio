@@ -3,6 +3,18 @@ import { Award, Trophy } from "lucide-react";
 export const ACHIEVEMENTS = [
     {
         id: 1,
+        title: "HACKATHON'26",
+        organization: "FORTYGUARD",
+        year: "2026",
+        description: "Participated in the FORTYGUARD Hackathon.",
+        image: "/certificates/HeatTrip.png",
+        organizationImage: "/certificates/HeatTrip.png",
+        link: "https://github.com/tarunx47",
+        icon: Trophy,
+        color: "text-amber-500"
+    },
+    {
+        id: 3,
         title: "Hackathon 2K26: Byte Brawl 3.0",
         organization: "Sri Balaji Shiksha Samiti (SBCET Jaipur)",
         year: "2026",
