@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { useScrollContext } from "@/context/ScrollContext";
+import VisitorCounter from "@/components/VisitorCounter";
 
 const HERO_VIDEO = "/media/samurai-wallpaper.mp4";
 
@@ -19,19 +20,23 @@ export const HomePage = () => {
             <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-4 pb-8 pt-24 sm:px-10 sm:pb-10 sm:pt-28 lg:px-16 lg:pb-12 lg:pt-32">
                 <div className="hero-enter max-w-3xl">
                     <p className="mb-4 sm:mb-6 font-mono text-[0.62rem] sm:text-xs font-medium uppercase tracking-[0.22em] sm:tracking-[0.28em] text-stone-300/70">
-                        Independent developer / selected work
+                        SOFTWARE DEVELOPER
                     </p>
                     <h1 className="font-editorial text-4xl sm:text-7xl lg:text-[clamp(5rem,9vw,9.25rem)] font-medium leading-[0.95] sm:leading-[0.9] tracking-[-0.045em] text-stone-50 break-words">
                         Tarun Dayma
                     </h1>
                     <div className="mt-5 sm:mt-7 max-w-md border-l border-stone-200/30 pl-3 sm:pl-4 text-xs sm:text-base leading-5 sm:leading-7 text-stone-200/75">
-                        A developer portfolio for considered interfaces, useful systems, and work in progress.
+                        Someone who learns by actually doing.<br />
+                        Open to full-time roles, internships & freelance ·{" "}
+                        <button onClick={() => setContactOpen(true)} className="text-stone-100 hover:underline underline-offset-4">
+                            Get in touch →
+                        </button>
                     </div>
                 </div>
 
                 <div className="hero-enter hero-enter-delay mt-10 sm:mt-20 flex flex-col gap-4 sm:gap-5 border-t border-stone-200/20 pt-4 sm:pt-5 sm:flex-row sm:items-end sm:justify-between">
                     <p className="max-w-56 text-[0.7rem] sm:text-xs leading-4 sm:leading-5 text-stone-300/65">
-                        Explore the archive of projects, experiments, and technical notes.
+                        Projects I’ve shipped, experiments I’ve run, and ideas still cooking.
                     </p>
                     <HeroSectionNav onNavigate={scrollTo} items={[
                         { label: "Home", number: "01", ref: HomeRef },
@@ -47,6 +52,9 @@ export const HomePage = () => {
                         View work <ArrowDown className="h-3.5 w-3.5" strokeWidth={1.5} />
                     </button>
                 </div>
+
+                {/* Visitor counter — subtle, bottom of hero */}
+                <VisitorCounter />
             </div>
         </section>
     );
