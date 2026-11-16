@@ -11,14 +11,14 @@ export const ProfileCard = () => {
         TARUN DAYMA
         <span className="mt-1 block text-sm font-normal text-muted-foreground">BCA Student &amp; Developer</span>
       </div>
-      <div className="mt-5 flex justify-center gap-4">
+      <div className="mt-4 flex justify-center gap-2">
         {cardSocials.map((social) => (
           <a
             key={social.id}
             href={social.navigateLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={social.title}
           >
             <social.icon size={20} strokeWidth={1.5} aria-hidden="true" />

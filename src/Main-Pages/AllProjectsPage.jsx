@@ -18,23 +18,23 @@ export const AllProjectsPage = () => {
     return (
         <div className="min-h-screen w-full bg-background p-4 text-foreground md:px-12 md:py-12">
             {/* header section */}
-            <div className="max-w-7xl mx-auto mb-16 pt-8">
+            <div className="max-w-7xl mx-auto mb-10 sm:mb-16 pt-4 sm:pt-8">
                 <button
                     onClick={handleBack}
-                    className="group flex items-center gap-2 text-sm font-medium text-zinc-500 dark:text-zinc-500 hover:text-black dark:hover:text-white transition-colors duration-500 mb-8"
+                    className="group flex min-h-[44px] items-center gap-2 text-sm font-medium text-zinc-500 dark:text-zinc-500 hover:text-black dark:hover:text-white transition-colors duration-500 mb-6 sm:mb-8"
                 >
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-500" />
                     Back to home
                 </button>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3 sm:gap-4">
                     <h1
-                        className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100"
+                        className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 break-words"
                     >
                         My Work
                     </h1>
                     <p
-                        className="text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl font-light leading-relaxed"
+                        className="text-base sm:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl font-light leading-relaxed"
                     >
                         A collection of projects focused on web development, design systems, and interactive interfaces.
                     </p>
@@ -97,14 +97,15 @@ const ProjectCard = () => {
                     <h3 className="text-xl font-semibold text-foreground">
                         {props.topicName}
                     </h3>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1 -mr-2">
                         {props.github && (
                             <a
                                 href={props.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
+                                aria-label="GitHub Repository"
+                                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
                             >
                                 <Github className="w-5 h-5" />
                             </a>
@@ -115,7 +116,8 @@ const ProjectCard = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
+                                aria-label="Live Site"
+                                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
                             >
                                 <Globe className="w-5 h-5" />
                             </a>

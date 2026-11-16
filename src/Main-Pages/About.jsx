@@ -8,17 +8,16 @@ import { TECH_ICONS } from "@/constants";
 import ToolTipEffect from "@/components/ui/tooltip";
 export const AboutPage = () => {
     {/* second section  */ }
-    return <section className="h-full w-full flex flex-col items-center justify-evenly gap-10  p-4 md:p-0" >
+    return <section className="h-full w-full flex flex-col items-center justify-evenly gap-10 p-0" >
         {/* image div */}
-        <div className="h-full w-full flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-0">
+        <div className="h-full w-full flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-12">
 
-            {/* rigth part for about me */}
-            <div className="flex flex-col justify-center gap-8 w-full md:w-[50%] ">
+            {/* right part for about me */}
+            <div className="flex flex-col justify-center gap-8 w-full md:w-[55%] lg:w-[50%]">
                 <AboutComp />
             </div>
             {/* Image - animates with first paragraph */}
-            <div
-            >
+            <div className="w-full md:w-auto flex justify-center">
                 <ProfileCard />
             </div>
         </div>
@@ -31,13 +30,13 @@ export const AboutPage = () => {
 
 
 const AboutComp = () => {
-    return <div className="flex flex-col gap-8 w-full md:w-150 font-light dark:font-extralight ">
+    return <div className="flex flex-col gap-6 sm:gap-8 w-full font-light dark:font-extralight">
         {/* Header - animates first */}
         <div>
             <PageHeader val={'01.'} subheading={"About"} mainHeading={"Me"} />
         </div>
 
-        <span className="text-base md:text-xl flex flex-col gap-4">
+        <span className="text-sm sm:text-base md:text-xl flex flex-col gap-4 leading-relaxed">
             {/* First paragraph - animates with image */}
             <p>
                 Hey! I'm Tarun, a second-year Bachelor of Computer Applications (BCA) student based in Jaipur, Rajasthan. I build solutions that
@@ -61,11 +60,11 @@ const AboutComp = () => {
 
 const SkillsComponent = () => {
     return (
-        <div className="mt-4 w-full flex flex-col pl ">
-            <h3 className="text-sm md:text-base font-semibold tracking-widest text-muted-foreground mb-2">
+        <div className="mt-6 sm:mt-8 w-full flex flex-col">
+            <h3 className="text-xs sm:text-sm md:text-base font-semibold tracking-widest text-muted-foreground mb-3">
                 EXPERTISE AREAS
             </h3>
-            <div className="font-medium flex  gap-6 text-2xl w-full">
+            <div className="font-medium flex flex-wrap gap-4 sm:gap-6 text-2xl w-full">
                 {SKILLIcons.map((iconName) => {
                     const Icon = TECH_ICONS[iconName];
                     return Icon ? (

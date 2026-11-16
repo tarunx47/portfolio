@@ -8,7 +8,7 @@ export function IconLink({ href, icon: Icon, className, ...props }) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-                "inline-flex item   s-center gap-4 px-3 py-2 rounded-2xl",
+                "inline-flex items-center gap-4 px-3 py-2 rounded-2xl",
                 "text-lg font-light",
                 "transition-colors duration-700 cursor-pointer",
                 "bg-black text-white",

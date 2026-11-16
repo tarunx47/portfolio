@@ -18,7 +18,7 @@ export const ProjectsPage = () => {
     const ProjectsArray = PROJECTS.slice(0, 2);
 
 
-    return <div className="h-full flex flex-col p-2 font-light overflow-x-hidden">
+    return <div className="h-full flex flex-col font-light overflow-x-hidden">
 
 
         <div
@@ -35,13 +35,13 @@ export const ProjectsPage = () => {
                 </ProjectContextProvider>
             })}
         </div>
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-8 sm:mt-10">
             <button
                 onClick={() => {
                     sessionStorage.setItem('scrollPosition', window.scrollY.toString());
                     navigate('/all-projects');
                 }}
-                className={`group relative px-6 py-3 text-lg font-medium overflow-hidden rounded-full transition-all duration-700 ease-out ${onhoverBlackWhite} border border-black dark:border-white`}
+                className={`group relative inline-flex min-h-[48px] items-center px-6 py-3 text-base sm:text-lg font-medium overflow-hidden rounded-full transition-all duration-700 ease-out ${onhoverBlackWhite} border border-black dark:border-white`}
             >
                 <span className="relative z-10 flex items-center gap-2">
                     Show All Projects
@@ -62,10 +62,10 @@ const ProjectInfoDiv = () => {
 
     return (
         <div
-            className="max-w-6xl w-full mx-auto p-2 md:p-4 my-8 md:my-16"
+            className="max-w-6xl w-full mx-auto my-6 sm:my-8 md:my-16"
         >
             <div className={cn(
-                "bg-card rounded-lg p-4 md:p-6 border border-border flex flex-col gap-6 relative overflow-hidden transition-colors hover:border-foreground/30",
+                "bg-card rounded-lg p-4 sm:p-5 md:p-6 border border-border flex flex-col gap-6 relative overflow-hidden transition-colors hover:border-foreground/30",
                 index === 0 ? "md:flex-row items-center" : "md:flex-row-reverse items-center"
             )}>
                 {/* --- IMAGE SECTION (Left, 2/3) --- */}
@@ -159,22 +159,36 @@ const LinksForMoreDiv = () => {
     }
 
     return (
-        <div className="flex gap-3 ml-0 md:ml-2 flex items-center">
+        <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
             {props.github && (
-                <a href={props.github} target="_blank" rel="noopener noreferrer" className={onhoverScale} title="GitHub Repository">
+                <a
+                    href={props.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted ${onhoverScale}`}
+                    title="GitHub Repository"
+                    aria-label="GitHub Repository"
+                >
                     <GithubIcon />
                 </a>
             )}
             {props.deployLink && props.deployLink.trim() !== '' && (
-                <a href={props.deployLink} target="_blank" rel="noopener noreferrer" className={onhoverScale} title="Live Site">
-                    <Globe className="w-6 h-6" />
+                <a
+                    href={props.deployLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted ${onhoverScale}`}
+                    title="Live Site"
+                    aria-label="Live Site"
+                >
+                    <Globe className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
             )}
 
             {/* Share / Learn More - Pill Button */}
             <button
                 onClick={handleNavigation}
-                className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-full text-sm font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors duration-500 ease-out ml-auto md:ml-0"
+                className="flex min-h-[44px] items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-full text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors duration-500 ease-out ml-auto"
             >
                 Learn more
                 <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />

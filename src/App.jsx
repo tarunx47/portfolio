@@ -29,7 +29,7 @@ export default function App() {
 
                 {/* Chatbot floating widget */}
                 <ChatBubble />
-                <div className="w-screen flex box-border ">
+                <div className="w-full max-w-full min-h-screen flex flex-col box-border overflow-x-hidden">
 
                     <ScrollContextProvider>
                         <TooltipProvider>
@@ -41,7 +41,7 @@ export default function App() {
                                 {/* Main pages*/}
                                 <Routes>
                                     <Route path="/" element={
-                                        <div className="w-full flex flex-col text-black bg-white dark:text-white dark:bg-black">
+                                        <div className="w-full max-w-full flex flex-col text-black bg-white dark:text-white dark:bg-black overflow-x-hidden">
                                             <MainComp />
                                         </div>
                                     } />

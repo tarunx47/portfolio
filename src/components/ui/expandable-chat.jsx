@@ -17,16 +17,16 @@ export function ExpandableChat({ children, className, position = 'bottom-right',
     const toggleExpanded = () => setIsExpanded(!isExpanded);
 
     const positionClasses = {
-        'bottom-right': 'bottom-18 right-4 md:bottom-4 md:right-4',
-        'bottom-left': 'bottom-18 left-4 md:bottom-4 md:left-4',
-        'top-right': 'top-4 right-4',
-        'top-left': 'top-4 left-4',
+        'bottom-right': 'bottom-4 right-3 sm:bottom-6 sm:right-6',
+        'bottom-left': 'bottom-4 left-3 sm:bottom-6 sm:left-6',
+        'top-right': 'top-4 right-3 sm:top-6 sm:right-6',
+        'top-left': 'top-4 left-3 sm:top-6 sm:left-6',
     };
 
     const sizeClasses = {
-        sm: 'w-80 h-96',
-        md: 'w-96 h-[500px]',
-        lg: 'w-[400px] h-[600px]',
+        sm: 'w-[calc(100vw-1.5rem)] sm:w-80 h-[400px] max-h-[80vh]',
+        md: 'w-[calc(100vw-1.5rem)] sm:w-96 h-[480px] max-h-[85vh]',
+        lg: 'w-[calc(100vw-1.5rem)] sm:w-[380px] md:w-[400px] h-[520px] max-h-[85vh]',
     };
 
     return (
@@ -35,7 +35,7 @@ export function ExpandableChat({ children, className, position = 'bottom-right',
                 {!isOpen && (
                     <button
                         onClick={toggleOpen}
-                        className="flex items-center justify-center w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg hover:scale-110 transition-transform"
+                        className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-primary text-primary-foreground rounded-full shadow-lg hover:scale-105 active:scale-95 transition-transform"
                         aria-label="Open chat"
                     >
                         {icon}
@@ -45,7 +45,7 @@ export function ExpandableChat({ children, className, position = 'bottom-right',
                     <div
                         className={cn(
                             'bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden transition-all',
-                            isExpanded ? 'w-full h-[90vh]' : sizeClasses[size],
+                            isExpanded ? 'w-[calc(100vw-1.5rem)] sm:w-[90vw] md:w-[600px] h-[85vh]' : sizeClasses[size],
                             className
                         )}
                     >

@@ -31,42 +31,42 @@ export const ProjectInfoPage = () => {
     }
 
     return (
-        <div className="min-h-screen w-full bg-white dark:bg-black text-slate-900 dark:text-gray-100 font-light overflow-x-hidden pt-20 pb-20">
-            <div className="max-w-4xl mx-auto px-6 md:px-10 flex flex-col gap-12">
+        <div className="min-h-screen w-full bg-white dark:bg-black text-slate-900 dark:text-gray-100 font-light overflow-x-hidden pt-20 sm:pt-24 pb-16 sm:pb-20">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-10 flex flex-col gap-8 sm:gap-12">
 
                 {/* Back Button */}
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 self-start text-sm md:text-base font-medium opacity-60 hover:opacity-100 transition-all duration-500 ease-out hover:-translate-x-2 p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5"
+                    className="flex min-h-[44px] items-center gap-2 self-start text-sm md:text-base font-medium opacity-60 hover:opacity-100 transition-all duration-500 ease-out hover:-translate-x-2 p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5"
                 >
                     <ArrowLeft className="w-4 h-4 transition-transform duration-500" /> Back to Projects
                 </button>
 
                 {/* Header Section */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4 sm:gap-6">
                     <div className="flex flex-col gap-2">
                         <span className="text-xs md:text-sm font-mono text-slate-500 dark:text-slate-400">
                             + {project.role}
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+                        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight break-words">
                             {project.title}
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400">
+                        <p className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-400">
                             {project.tagline}
                         </p>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-3 sm:gap-4">
                         {project.github && (
                             <a href={project.github} target="_blank" rel="noopener noreferrer"
-                                className="group flex items-center gap-2 rounded-md bg-primary px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+                                className="group flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-md bg-primary px-5 sm:px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary/90 text-sm sm:text-base">
                                 <Github className="w-5 h-5 transition-transform duration-500" /> View on GitHub
                             </a>
                         )}
                         {project.deployLink && project.deployLink.trim() !== '' && (
                             <a href={project.deployLink} target="_blank" rel="noopener noreferrer"
-                                className="group flex items-center gap-2 rounded-md bg-primary px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+                                className="group flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-md bg-primary px-5 sm:px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary/90 text-sm sm:text-base">
                                 <ExternalLink className="w-5 h-5 transition-transform duration-500" /> View Live Demo
                             </a>
                         )}
@@ -147,7 +147,7 @@ export const ProjectInfoPage = () => {
                 <hr className="border-gray-100 dark:border-white/10" />
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 self-start text-sm md:text-base font-medium opacity-60 hover:opacity-100 transition-all duration-500 ease-out hover:-translate-x-2"
+                    className="flex min-h-[44px] items-center gap-2 self-start text-sm md:text-base font-medium opacity-60 hover:opacity-100 transition-all duration-500 ease-out hover:-translate-x-2 p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5"
                 >
                     <ArrowLeft className="w-4 h-4 transition-transform duration-500" /> Back to Projects
                 </button>

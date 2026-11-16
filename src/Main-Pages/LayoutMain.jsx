@@ -27,17 +27,17 @@ export const MainComp = () => {
         });
     }, [AboutRef, HomeRef, MoreRef, ProjectsRef, location.state, navigate]);
 
-    return <main className="w-full flex flex-col items-center pb-20">
+    return <main className="w-full max-w-full flex flex-col items-center pb-12 sm:pb-20 overflow-x-hidden">
 
 
-        <div className="w-full scroll-mt-20" ref={HomeRef} data-section="Home"><HomePage /></div>
-        <div className="w-full max-w-6xl scroll-mt-24 px-4 py-18 md:px-10" ref={AboutRef} data-section="About"><AboutPage /></div>
-        <div className="w-full max-w-6xl scroll-mt-24 px-4 py-10 md:px-10" ref={ProjectsRef} data-section="Projects"><ProjectsPage /></div>
+        <div className="w-full scroll-mt-16 sm:scroll-mt-20" ref={HomeRef} data-section="Home"><HomePage /></div>
+        <div className="w-full max-w-6xl scroll-mt-20 sm:scroll-mt-24 px-4 py-12 sm:py-18 md:px-10" ref={AboutRef} data-section="About"><AboutPage /></div>
+        <div className="w-full max-w-6xl scroll-mt-20 sm:scroll-mt-24 px-4 py-8 sm:py-10 md:px-10" ref={ProjectsRef} data-section="Projects"><ProjectsPage /></div>
 
-        <div className="w-full max-w-6xl scroll-mt-24 px-4 py-10 md:px-10" ref={MoreRef} data-section="More"><AchievementsPage /></div>
-        <div className="w-full max-w-6xl px-4 py-10 md:px-10" data-section="Reads"><ReadsPage /></div>
-        <div className="w-full max-w-6xl px-4 py-10 md:px-10" data-section="Chinese"><ChineseLearningPage /></div>
-        <div className="w-full max-w-6xl px-4 py-10 md:px-10" data-section="Github"><GithubPage /></div>
+        <div className="w-full max-w-6xl scroll-mt-20 sm:scroll-mt-24 px-4 py-8 sm:py-10 md:px-10" ref={MoreRef} data-section="More"><AchievementsPage /></div>
+        <div className="w-full max-w-6xl px-4 py-8 sm:py-10 md:px-10" data-section="Reads"><ReadsPage /></div>
+        <div className="w-full max-w-6xl px-4 py-8 sm:py-10 md:px-10" data-section="Chinese"><ChineseLearningPage /></div>
+        <div className="w-full max-w-6xl px-4 py-8 sm:py-10 md:px-10" data-section="Github"><GithubPage /></div>
         <Footer />
     </main>
 }
