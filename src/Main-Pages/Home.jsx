@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { useScrollContext } from "@/context/ScrollContext";
 import VisitorCounter from "@/components/VisitorCounter";
+import { SOCIAL_LINKS } from "@/constants";
 
 const HERO_VIDEO = "/media/samurai-wallpaper.mp4";
+const CONTACT_LINK = SOCIAL_LINKS.find((link) => link.id === "email")?.navigateLink || "mailto:tarundayma54@gmail.com";
 
 export const HomePage = () => {
     const { HomeRef, AboutRef, ProjectsRef, MoreRef } = useScrollContext();
@@ -28,9 +30,9 @@ export const HomePage = () => {
                     <div className="mt-5 sm:mt-7 max-w-md border-l border-stone-200/30 pl-3 sm:pl-4 text-xs sm:text-base leading-5 sm:leading-7 text-stone-200/75">
                         Someone who learns by actually doing.<br />
                         Open to full-time roles, internships & freelance ·{" "}
-                        <button onClick={() => setContactOpen(true)} className="text-stone-100 hover:underline underline-offset-4">
+                        <a href={CONTACT_LINK} className="text-stone-100 hover:underline underline-offset-4">
                             Get in touch →
-                        </button>
+                        </a>
                     </div>
                 </div>
 

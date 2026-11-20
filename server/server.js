@@ -174,8 +174,50 @@ app.post('/api/chat', chatLimiter, async (req, res) => {
   }
 });
 
+// ─── Visitor Counter (Upstash Redis via REST API) ───────────────────
+app.get(['/api/visitor', '/visitor'], async (req, res) => {
+  try {
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
 
+    if (!url || !token) {
+      return res.status(503).json({ error: 'Visitor counter not configured' });
+    }
 
+    const rawId = req.query.visitorId;
+    const visitorId = typeof rawId === 'string' ? rawId.trim() : '';
+    if (!visitorId || visitorId.length > 64) {
+      return res.status(400).json({ error: 'Invalid visitor ID' });
+    }
+
+    // Use Upstash Redis REST pipeline to atomically add visitor and retrieve total count
+    const endpoint = url.replace(/\/+$/, '') + '/pipeline';
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([
+        ['SADD', 'portfolio:visitors', visitorId],
+        ['SCARD', 'portfolio:visitors'],
+      ]),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Upstash returned HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const isNew = data[0]?.result === 1;
+    const count = typeof data[1]?.result === 'number' ? data[1].result : 0;
+
+    res.json({ count, isNew });
+  } catch (error) {
+    console.error('[Visitor Counter Error]', error.message);
+    res.status(500).json({ error: 'Failed to track visitor' });
+  }
+});
 
 
 if (!process.env.VERCEL) {
